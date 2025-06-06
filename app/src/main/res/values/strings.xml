@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Travel App</string>
+    <string name="Search">Search</string>
+    <string name="see_all">See All</string>
+    <string name="recommended">Recommended</string>
+    <string name="popular_destination">Popular Destination</string>
+    <string name="address_city">Address, City...</string>
+</resources>
