@@ -22,9 +22,10 @@
             android:orientation="vertical"
             android:paddingBottom="100dp">
 
+            <!-- Location & Spinner -->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="48dp">
 
@@ -56,9 +57,10 @@
                     app:layout_constraintTop_toBottomOf="@+id/textView2" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <!-- Search box -->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_margin="16dp"
                 android:background="@drawable/grey_bg">
 
@@ -96,9 +98,10 @@
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <!-- Slider -->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
 
                 <androidx.viewpager2.widget.ViewPager2
                     android:id="@+id/viewPager2"
@@ -123,17 +126,19 @@
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <!-- Categories -->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_marginTop="8dp"
+                android:layout_height="wrap_content">
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerViewCategory"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:clipToPadding="false"
-                    android:paddingStart="16dp"
-                    android:paddingEnd="16dp"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -150,9 +155,10 @@
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <!-- Popular -->
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="16dp"
                 android:orientation="horizontal">
@@ -171,23 +177,21 @@
                     android:id="@+id/seeAllPopular"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
                     android:text="@string/see_all"
                     android:textColor="@color/purple" />
-
             </LinearLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerViewPopular"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:clipToPadding="false"
-                    android:paddingStart="16dp"
-                    android:paddingEnd="16dp"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -204,15 +208,15 @@
                     app:layout_constraintTop_toTopOf="@+id/recyclerViewPopular" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <!-- Recommended -->
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="16dp"
                 android:orientation="horizontal">
 
                 <TextView
-
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -226,24 +230,22 @@
                     android:id="@+id/seeAllRecommendedBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
                     android:text="@string/see_all"
                     android:textColor="@color/purple"
                     tools:ignore="DuplicateIds" />
-
             </LinearLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerViewRecommended"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:clipToPadding="false"
-                    android:paddingStart="16dp"
-                    android:paddingEnd="16dp"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -277,7 +279,6 @@
         app:cnb_unselectedColor="@color/darkBlue"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,4 +5,14 @@
     <string name="recommended">Recommended</string>
     <string name="popular_destination">Popular Destination</string>
     <string name="address_city">Address, City...</string>
+    <string name="location">Location</string>
+    <string name="title">title</string>
+    <string name="_0">$0</string>
+    <string name="person">/person</string>
+    <string name="address">Address</string>
+    <string name="_5">5</string>
+    <string name="image_content_description" />
+    <string name="star_icon_description" />
+    <string name="todo">TODO</string>
+
 </resources>

@@ -1,9 +1,9 @@
 package com.example.travelapp.Domain;
 
-public class Slideritems {
+public class SliderItems {
     private String url;
 
-    public Slideritems() {
+    public SliderItems() {
     }
 
     public String getUrl() {

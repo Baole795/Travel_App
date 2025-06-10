@@ -1,5 +1,6 @@
 package com.example.travelapp.Adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,16 +11,19 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
-import com.example.travelapp.Domain.Slideritems;
+import com.example.travelapp.Domain.SliderItems;
 import com.example.travelapp.R;
+import com.bumptech.glide.Glide;
+
 
 import java.util.ArrayList;
 
 public class SliderAdapter extends RecyclerView.Adapter<SliderAdapter.SliderViewholder> {
-    private ArrayList<Slideritems> sliderItems;
-    private ViewPager2 viewPager2;
+    private final ArrayList<SliderItems> sliderItems;
+    private final ViewPager2 viewPager2;
     private Context context;
-    private Runnable runable=new Runnable() {
+    private final Runnable runable=new Runnable() {
+        @SuppressLint("NotifyDataSetChanged")
         @Override
         public void run() {
             sliderItems.addAll(sliderItems);
@@ -27,7 +31,7 @@ public class SliderAdapter extends RecyclerView.Adapter<SliderAdapter.SliderView
         }
     };
 
-    public SliderAdapter(ArrayList<Slideritems> sliderItems, ViewPager2 viewPager2) {
+    public SliderAdapter(ArrayList<SliderItems> sliderItems, ViewPager2 viewPager2) {
         this.sliderItems = sliderItems;
         this.viewPager2 = viewPager2;
     }
@@ -42,7 +46,10 @@ public class SliderAdapter extends RecyclerView.Adapter<SliderAdapter.SliderView
 
     @Override
     public void onBindViewHolder(@NonNull SliderAdapter.SliderViewholder holder, int position) {
-
+        holder.setImage(sliderItems.get(position));
+        if (position == sliderItems.size() - 2) {
+            viewPager2.post(runable);
+        }
     }
 
     @Override
@@ -50,12 +57,19 @@ public class SliderAdapter extends RecyclerView.Adapter<SliderAdapter.SliderView
         return sliderItems.size();
     }
     public class SliderViewholder extends RecyclerView.ViewHolder {
-        private ImageView imageView;
+        private final ImageView imageView;
         public SliderViewholder(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.imageSlider);
         }
-        void setImage(SliderItems.getUrl())
+        void setImage(SliderItems sliderItems){
+            Glide.with(context)
+                    .load(sliderItems.getUrl())
+                    .into(imageView);
+        }
 
     }
 }
+
+
+

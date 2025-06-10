@@ -4,8 +4,8 @@ public class Location {
     private int Id;
     private String Loc;
 
-    public Location(int id) {
-        Id = id;
+    public Location() {
+        // Required empty constructor for Firebase
     }
 
     @Override
