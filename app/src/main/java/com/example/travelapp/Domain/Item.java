@@ -3,6 +3,7 @@ package com.example.travelapp.Domain;
 import java.io.Serializable;
 
 public class Item implements Serializable {
+    public String getPic;
     private String title;
     private String address;
     private String description;
