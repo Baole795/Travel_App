@@ -15,6 +15,20 @@
         android:theme="@style/Theme.TravelApp"
         tools:targetApi="31">
         <activity
+            android:name=".Activity.LoginActivity"
+            android:exported="true" >
+            <!-- Đoạn mã này có thể không cần thiết nếu SplashActivity là launcher -->
+        </activity>
+        <activity
+            android:name=".Activity.RegisterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.ForgotPasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.TicketActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activity.DetailActivity"
             android:exported="false" />
         <activity
@@ -22,7 +36,6 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

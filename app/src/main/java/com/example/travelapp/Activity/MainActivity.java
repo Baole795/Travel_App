@@ -1,5 +1,6 @@
 package com.example.travelapp.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -22,6 +23,8 @@ import com.example.travelapp.Domain.Location;
 import com.example.travelapp.Domain.SliderItems;
 import com.example.travelapp.R;
 import com.example.travelapp.databinding.ActivityMainBinding;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser; // Import FirebaseUser
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -33,13 +36,22 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
     private FirebaseDatabase database;
+    private FirebaseAuth mAuth; // Thêm biến FirebaseAuth
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        binding=ActivityMainBinding.inflate(getLayoutInflater());
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        database=FirebaseDatabase.getInstance("https://travel-app-12-default-rtdb.asia-southeast1.firebasedatabase.app");
+
+        mAuth = FirebaseAuth.getInstance(); // Khởi tạo FirebaseAuth
+        database = FirebaseDatabase.getInstance("https://travel-app-12-default-rtdb.asia-southeast1.firebasedatabase.app");
+
+        // --- BẮT ĐẦU CODE MỚI ---
+        setUserInfo();
+        setupLogoutButton();
+        // --- KẾT THÚC CODE MỚI ---
 
         initLocations();
         initBanners();
@@ -47,6 +59,32 @@ public class MainActivity extends AppCompatActivity {
         initPopular();
         initRecommended();
     }
+
+    // --- BẮT ĐẦU CODE MỚI ---
+    private void setUserInfo() {
+        FirebaseUser user = mAuth.getCurrentUser();
+        if (user != null) {
+            String displayName = user.getDisplayName();
+            if (displayName != null && !displayName.isEmpty()) {
+                binding.welcomeTxt.setText("Welcome " + displayName + "!");
+            } else {
+                binding.welcomeTxt.setText("Welcome!");
+            }
+        }
+    }
+
+    private void setupLogoutButton() {
+        binding.logoutBtn.setOnClickListener(v -> {
+            mAuth.signOut();
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            finish();
+        });
+    }
+    // --- KẾT THÚC CODE MỚI ---
+
+    // ... các phương thức init... của bạn giữ nguyên ...
     private void initRecommended() {
 
         DatabaseReference myref = database.getReference("Item");
@@ -66,7 +104,6 @@ public class MainActivity extends AppCompatActivity {
                     }
                     binding.progressBarRecommended.setVisibility(View.GONE);
                 }
-                // Cập nhật giao diện hoặc xử lý danh sách locations ở đây
             }
 
             @Override
@@ -94,7 +131,6 @@ public class MainActivity extends AppCompatActivity {
                     }
                     binding.progressBarPopular.setVisibility(View.GONE);
                 }
-                // Cập nhật giao diện hoặc xử lý danh sách locations ở đây
             }
 
             @Override
@@ -122,7 +158,6 @@ public class MainActivity extends AppCompatActivity {
                     }
                     binding.progressBarCategory.setVisibility(View.GONE);
                 }
-                // Cập nhật giao diện hoặc xử lý danh sách locations ở đây
             }
 
             @Override
@@ -140,14 +175,13 @@ public class MainActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.exists()) {
                     for (DataSnapshot issuee : snapshot.getChildren()) {
-                            list.add(issuee.getValue(Location.class));
-                        }
+                        list.add(issuee.getValue(Location.class));
+                    }
 
                     ArrayAdapter<Location> adapter=new ArrayAdapter<>(MainActivity.this,R.layout.sp_item,list);
                     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     binding.locationSp.setAdapter(adapter);
-                    }
-                    // Cập nhật giao diện hoặc xử lý danh sách locations ở đây
+                }
             }
 
             @Override

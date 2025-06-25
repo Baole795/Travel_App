@@ -14,5 +14,12 @@
     <string name="image_content_description" />
     <string name="star_icon_description" />
     <string name="todo">TODO</string>
+    <string name="upcoming_trip">Upcoming trip</string>
+    <string name="show_this_ticket_to_the_your_guide_before_departure">Show this ticket to the your guide before departure</string>
+    <string name="tour_guide">Tour Guide</string>
+    <string name="time">Time</string>
+    <string name="tip_duration">Tip Duration</string>
+    <string name="Title">Title</string>
+    <string name="download_ticket">Download Ticket</string>
 
 </resources>

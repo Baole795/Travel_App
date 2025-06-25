@@ -1,5 +1,6 @@
 package com.example.travelapp.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -46,11 +47,10 @@ public class DetailActivity extends AppCompatActivity {
             .load(object.getPic())
             .into(binding.pic);
 
-    binding.addToCartBtn.setOnClickListener(new View.OnClickListener(){
-        @Override
-        public void onClick(View view) {
-            // Handle add to cart action
-        }
+    binding.addToCartBtn.setOnClickListener(view -> {
+        Intent intent = new Intent(DetailActivity.this, TicketActivity.class);
+        intent.putExtra("object", object);
+        startActivity(intent);
     });
     }
 

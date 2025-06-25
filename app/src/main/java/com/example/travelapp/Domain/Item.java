@@ -23,8 +23,8 @@ public class Item implements Serializable {
         return title;
     }
 
-    public void setTile(String tile) {
-        this.title = tile;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getAddress() {
