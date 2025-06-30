@@ -18,6 +18,7 @@ public class Item implements Serializable {
     private int bed;
     private String distance;
     private double score;
+    private String id;
 
     public String getTitle() {
         return title;
@@ -131,6 +132,14 @@ public class Item implements Serializable {
         this.score = score;
     }
 
+    // ▼▼▼ THÊM GETTER/SETTER CHO ID ▼▼▼
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
     public Item() {
 
 

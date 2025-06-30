@@ -4,17 +4,24 @@ public class User {
     private String firstName;
     private String lastName;
     private String email;
+    private String phoneNumber;
+    private String avatarUrl;
+    private String role;
 
-    // Firebase cần một constructor rỗng
+    // Constructor rỗng cho Firebase
     public User() {
     }
 
-    public User(String firstName, String lastName, String email) {
+    // Constructor đầy đủ
+    public User(String firstName, String lastName, String email, String phoneNumber) {
         this.firstName = firstName;
-        this.lastName = lastName;
+        this.lastName = lastName; // Sửa lại từ this.lastName = firstName
         this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.role = "user"; // Mặc định là user
     }
 
+    // Getters và Setters
     public String getFirstName() {
         return firstName;
     }
@@ -38,4 +45,33 @@ public class User {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getAvatarUrl() {
+        return avatarUrl;
+    }
+
+    public void setAvatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public boolean isAdmin() {
+        return "admin".equals(role);
+    }
 }
+

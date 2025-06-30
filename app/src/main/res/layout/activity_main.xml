@@ -43,6 +43,8 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/logoutBtn" />
 
+                <!-- ImageView profileBtn đã được xóa -->
+
                 <ImageView
                     android:id="@+id/logoutBtn"
                     android:layout_width="wrap_content"
@@ -117,6 +119,7 @@
                     android:padding="8dp"
                     android:textColor="@color/darkBlue"
                     android:textSize="16sp"
+
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/button"
                     app:layout_constraintStart_toStartOf="parent"

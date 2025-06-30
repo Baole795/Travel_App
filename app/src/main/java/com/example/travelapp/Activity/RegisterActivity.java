@@ -38,17 +38,17 @@ public class RegisterActivity extends AppCompatActivity {
             String confirmPassword = binding.confirmPasswordEdt.getText().toString().trim();
 
             if (firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
-                Toast.makeText(RegisterActivity.this, "Please fill all fields", Toast.LENGTH_SHORT).show();
+                Toast.makeText(RegisterActivity.this, "Vui lòng điền đầy đủ thông tin", Toast.LENGTH_SHORT).show();
                 return;
             }
 
             if (password.length() < 6) {
-                Toast.makeText(RegisterActivity.this, "Password must be at least 6 characters", Toast.LENGTH_SHORT).show();
+                Toast.makeText(RegisterActivity.this, "Mật khẩu phải có ít nhất 6 ký tự", Toast.LENGTH_SHORT).show();
                 return;
             }
 
             if (!password.equals(confirmPassword)) {
-                Toast.makeText(RegisterActivity.this, "Passwords do not match", Toast.LENGTH_SHORT).show();
+                Toast.makeText(RegisterActivity.this, "Mật khẩu xác nhận không khớp", Toast.LENGTH_SHORT).show();
                 return;
             }
 
@@ -65,28 +65,32 @@ public class RegisterActivity extends AppCompatActivity {
                                         .build();
                                 firebaseUser.updateProfile(profileUpdates);
 
-                                // 2. Lưu thông tin chi tiết vào Realtime Database
-                                User user = new User(firstName, lastName, email);
-                                DatabaseReference userRef = database.getReference("Users");
-                                userRef.child(firebaseUser.getUid()).setValue(user);
-                            }
+                                // 2. Tạo đối tượng User với đầy đủ thông tin
+                                User user = new User(firstName, lastName, email, "");
 
-                            // Thông báo và chuyển hướng
-                            Toast.makeText(RegisterActivity.this, "Registration successful. Please login.", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                            startActivity(intent);
-                            finish();
+                                // 3. Lưu vào đúng đường dẫn trong Database
+                                DatabaseReference userRef = database.getReference("users"); // đổi Users thành users
+                                userRef.child(firebaseUser.getUid()).setValue(user)
+                                    .addOnSuccessListener(aVoid -> {
+                                        Toast.makeText(RegisterActivity.this,
+                                            "Đăng ký thành công", Toast.LENGTH_SHORT).show();
+                                        startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+                                        finish();
+                                    })
+                                    .addOnFailureListener(e -> {
+                                        Toast.makeText(RegisterActivity.this,
+                                            "Lỗi khi lưu thông tin: " + e.getMessage(),
+                                            Toast.LENGTH_SHORT).show();
+                                    });
+                            }
                         } else {
-                            // If sign in fails, display a message to the user.
-                            Toast.makeText(RegisterActivity.this, "Registration failed: " + task.getException().getMessage(),
-                                    Toast.LENGTH_LONG).show();
+                            Toast.makeText(RegisterActivity.this,
+                                "Đăng ký thất bại: " + task.getException().getMessage(),
+                                Toast.LENGTH_SHORT).show();
                         }
                     });
         });
 
-        binding.loginTxt.setOnClickListener(v -> {
-            finish(); // Go back to LoginActivity
-        });
+        binding.loginTxt.setOnClickListener(v -> finish());
     }
 }
