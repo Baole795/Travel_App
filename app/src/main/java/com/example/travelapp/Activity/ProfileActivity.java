@@ -58,24 +58,37 @@ public class ProfileActivity extends AppCompatActivity {
     private void loadUserProfile() {
         binding.progressBar.setVisibility(View.VISIBLE);
 
+        // Lấy email từ Firebase Auth (luôn có)
         String email = currentUser.getEmail();
         binding.emailTxt.setText(email);
 
+        // Lấy các thông tin khác từ Realtime Database
         userRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
                     User user = snapshot.getValue(User.class);
                     if (user != null) {
+                        // Hiển thị tên
                         String fullName = user.getLastName() + " " + user.getFirstName();
                         binding.nameTxt.setText(fullName);
+
+                        // Kiểm tra vai trò và hiển thị/ẩn nút Admin Panel
+                        if (user.getRole() != null && user.getRole().equals("admin")) {
+                            binding.adminPanelBtn.setVisibility(View.VISIBLE);
+                        } else {
+                            binding.adminPanelBtn.setVisibility(View.GONE);
+                        }
                     }
                 } else {
+                    // Trường hợp dự phòng: nếu không có dữ liệu trong database
+                    // thì thử lấy tên từ Auth Profile và ẩn nút admin
                     if (currentUser.getDisplayName() != null && !currentUser.getDisplayName().isEmpty()) {
                         binding.nameTxt.setText(currentUser.getDisplayName());
                     } else {
                         binding.nameTxt.setText("No Name Found");
                     }
+                    binding.adminPanelBtn.setVisibility(View.GONE);
                 }
                 binding.progressBar.setVisibility(View.GONE);
             }
@@ -105,6 +118,9 @@ public class ProfileActivity extends AppCompatActivity {
         });
         binding.historyBtn.setOnClickListener(v -> {
             startActivity(new Intent(ProfileActivity.this, BookingHistoryActivity.class));
+        });
+        binding.adminPanelBtn.setOnClickListener(v -> {
+            startActivity(new Intent(ProfileActivity.this, AdminDashboardActivity.class));
         });
     }
 }

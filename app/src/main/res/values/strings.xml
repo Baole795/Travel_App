@@ -21,5 +21,13 @@
     <string name="tip_duration">Tip Duration</string>
     <string name="Title">Title</string>
     <string name="download_ticket">Download Ticket</string>
+    <string name="manage_users">Manage Users</string>
+    <string name="manage_content">Manage Content</string>
+    <string name="manage_bookings">Manage Bookings</string>
+    <string name="analytics">Analytics</string>
+    <string name="manage_users_description">Icon for managing users</string>
+    <string name="manage_content_description">Icon for managing content</string>
+    <string name="manage_bookings_description">Icon for managing bookings</string>
+    <string name="analytics_description">Icon for analytics</string>
 
 </resources>

@@ -58,6 +58,9 @@
         <activity
             android:name=".Activity.ItemListActivity"
             android:exported="false" />
+        <activity
+            android:name=".Activity.AdminDashboardActivity"
+            android:exported="false" />
     </application>
 
 </manifest>
