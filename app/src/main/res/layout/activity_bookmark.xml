@@ -13,6 +13,7 @@
         android:layout_height="?attr/actionBarSize"
         app:layout_constraintTop_toTopOf="parent"
         app:title="My Bookmarks"
+        android:textStyle="bold"
         app:titleTextColor="@color/darkBlue"
         app:navigationIcon="@drawable/back" />
 
