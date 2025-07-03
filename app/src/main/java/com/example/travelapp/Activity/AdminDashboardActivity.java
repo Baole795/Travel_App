@@ -1,5 +1,6 @@
 package com.example.travelapp.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -38,5 +39,16 @@ public class AdminDashboardActivity extends AppCompatActivity {
         binding.cardAnalytics.setOnClickListener(v -> {
             Toast.makeText(this, "Analytics Clicked", Toast.LENGTH_SHORT).show();
         });
+        binding.cardManageUsers.setOnClickListener(v -> {
+            // Bỏ comment các dòng dưới đây
+            Intent intent = new Intent(this, ManageUsersActivity.class);
+            startActivity(intent);
+        });
+        binding.cardManageContent.setOnClickListener(v -> {
+            // Bỏ comment các dòng dưới đây
+            Intent intent = new Intent(this, ManageContentActivity.class);
+            startActivity(intent);
+        });
+
     }
 }

@@ -7,6 +7,8 @@ public class User {
     private String phoneNumber;
     private String avatarUrl;
     private String role;
+    private boolean locked = false;
+    private String uid;
 
     // Constructor rỗng cho Firebase
     public User() {
@@ -19,9 +21,12 @@ public class User {
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.role = "user"; // Mặc định là user
+        this.locked = false;// mặc định là không bị khoá
     }
 
     // Getters và Setters
+    public String getUid() { return uid; }
+    public void setUid(String uid) { this.uid = uid; }
     public String getFirstName() {
         return firstName;
     }
@@ -72,6 +77,13 @@ public class User {
 
     public boolean isAdmin() {
         return "admin".equals(role);
+    }
+    public boolean isLocked() {
+        return locked;
+    }
+
+    public void setLocked(boolean locked) {
+        this.locked = locked;
     }
 
 

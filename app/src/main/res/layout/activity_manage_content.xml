@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/auth_background_pastel"
+    tools:context=".Activity.ManageContentActivity">
+
+    <!-- Thanh công cụ với nút Back và Tiêu đề -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:title="Manage Content"
+        app:titleTextColor="@color/darkBlue"
+        app:navigationIcon="@drawable/back" />
+
+    <!-- Lưới chứa các thẻ chức năng -->
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:columnCount="2"
+        android:padding="12dp"
+        android:alignmentMode="alignMargins"
+        android:columnOrderPreserved="false">
+
+        <!-- Card 1: Manage Trips/Items -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardManageTrips"
+            style="@style/AdminDashboardCard">
+            <LinearLayout style="@style/AdminDashboardCardLayout">
+                <ImageView
+                    android:src="@drawable/ic_content"
+                    style="@style/AdminDashboardCardIcon"
+                    android:contentDescription="Manage Trips"/>
+                <TextView
+                    android:text="Manage Trips"
+                    style="@style/AdminDashboardCardText"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Card 2: Manage Banners -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardManageBanners"
+            style="@style/AdminDashboardCard">
+            <LinearLayout style="@style/AdminDashboardCardLayout">
+                <ImageView
+                    android:src="@drawable/ic_banner"
+                    style="@style/AdminDashboardCardIcon"
+                    android:contentDescription="Manage Banners"/>
+                <TextView
+                    android:text="Manage Banners"
+                    style="@style/AdminDashboardCardText"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Card 3: Manage Categories -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardManageCategories"
+            style="@style/AdminDashboardCard">
+            <LinearLayout style="@style/AdminDashboardCardLayout">
+                <ImageView
+                    android:src="@drawable/bottom_btn1"
+                    style="@style/AdminDashboardCardIcon"
+                    android:contentDescription="Manage Categories"/>
+                <TextView
+                    android:text="Manage Categories"
+                    style="@style/AdminDashboardCardText"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Card 4: Manage Locations -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardManageLocations"
+            style="@style/AdminDashboardCard">
+            <LinearLayout style="@style/AdminDashboardCardLayout">
+                <ImageView
+                    android:src="@drawable/location"
+                    style="@style/AdminDashboardCardIcon"
+                    android:contentDescription="Manage Locations"/>
+                <TextView
+                    android:text="Manage Locations"
+                    style="@style/AdminDashboardCardText"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+    </GridLayout>
+</LinearLayout>

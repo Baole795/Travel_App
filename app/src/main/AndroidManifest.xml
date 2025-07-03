@@ -61,6 +61,14 @@
         <activity
             android:name=".Activity.AdminDashboardActivity"
             android:exported="false" />
+        <activity
+            android:name=".Activity.ManageUsersActivity"
+            android:exported="false" />
+        <activity android:name=".Activity.ManageContentActivity" android:exported="false" />
+        <activity android:name=".Activity.ItemListAdminActivity" android:exported="false" />
+        <activity android:name=".Activity.AddEditItemActivity" android:exported="false" />
+        <activity android:name=".Activity.BookmarkActivity" android:exported="false" />
+
     </application>
 
 </manifest>

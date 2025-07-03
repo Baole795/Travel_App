@@ -21,9 +21,17 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Viewho
     private int selectedPosition = -1;
     private int lastSelectedPosition = -1;
     private Context context;
+    private OnCategoryClickListener listener; // <-- THÊM MỚI
 
-    public CategoryAdapter(List<Category> items) {
+
+    public interface OnCategoryClickListener {
+        void onCategoryClick(Category category);
+    }
+
+    // ▼▼▼ SỬA LẠI CONSTRUCTOR ▼▼▼
+    public CategoryAdapter(List<Category> items, OnCategoryClickListener listener) {
         this.items = items;
+        this.listener = listener;
     }
 
     @NonNull
@@ -45,6 +53,9 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Viewho
         holder.binding.getRoot().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (listener != null) {
+                    listener.onCategoryClick(item);
+                }
                 lastSelectedPosition = selectedPosition;
                 selectedPosition = position;
                 notifyItemChanged(lastSelectedPosition);

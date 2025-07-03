@@ -19,6 +19,7 @@ public class Item implements Serializable {
     private String distance;
     private double score;
     private String id;
+    private String categoryId;
 
     public String getTitle() {
         return title;
@@ -144,5 +145,14 @@ public class Item implements Serializable {
 
 
     }
+
+    public String getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(String categoryId) {
+        this.categoryId = categoryId;
+    }
+
 
 }

@@ -1,3 +1,5 @@
+//
+//
 //package com.example.travelapp.Activity;
 //
 //import android.content.Intent;
@@ -51,19 +53,25 @@
 //
 //        setUserInfo();
 //        setupLogoutButton();
+//        setupClickListeners(); // <-- Hàm mới để gom các listener
 //
 //        initLocations();
 //        initBanners();
 //        initCategory();
 //        initPopular();
 //        initRecommended();
+//    }
 //
-//        // ▼▼▼ PHẦN SỬA LỖI ▼▼▼
-//
-//        // 1. Đặt mục "Home" làm mục được chọn mặc định.
-//        // Dùng ID "exporer" từ file menu của bạn.
+//    private void setupClickListeners() {
+//        // Listener cho Bottom Menu
 //        binding.bottomMenu.setItemSelected(R.id.exporer, true);
+//        binding.bottomMenu.setOnItemSelectedListener(i -> {
+//            if (i == R.id.cart) {
+//                startActivity(new Intent(MainActivity.this, ProfileActivity.class));
+//            }
+//        });
 //
+//        // Listener cho nút Search
 //        binding.button.setOnClickListener(v -> {
 //            String searchText = binding.editTextText.getText().toString().trim();
 //            if (searchText.isEmpty()) {
@@ -74,17 +82,26 @@
 //                startActivity(intent);
 //            }
 //        });
-//        // 2. Thiết lập Listener để xử lý khi người dùng nhấn vào các mục menu
-//        binding.bottomMenu.setOnItemSelectedListener(i -> {
-//            // Khi nhấn vào item có id là 'cart' (tức là nút Profile của bạn), mở ProfileActivity
-//            if (i == R.id.cart) {
-//                startActivity(new Intent(MainActivity.this, ProfileActivity.class));
-//            }
+//
+//        // ▼▼▼ THÊM MỚI: Listener cho hai nút "See All" ▼▼▼
+//        binding.seeAllPopular.setOnClickListener(v -> {
+//            Intent intent = new Intent(MainActivity.this, ItemListActivity.class);
+//            // Gửi tên node Firebase và tiêu đề cho màn hình tiếp theo
+//            intent.putExtra("CATEGORY_NODE", "Popular");
+//            intent.putExtra("CATEGORY_TITLE", "Popular Destinations");
+//            startActivity(intent);
 //        });
-//        // ▲▲▲ KẾT THÚC PHẦN SỬA LỖI ▲▲▲
+//
+//        binding.seeAllRecommendedBtn.setOnClickListener(v -> {
+//            Intent intent = new Intent(MainActivity.this, ItemListActivity.class);
+//            // Gửi tên node Firebase và tiêu đề cho màn hình tiếp theo
+//            intent.putExtra("CATEGORY_NODE", "Item");
+//            intent.putExtra("CATEGORY_TITLE", "Recommended");
+//            startActivity(intent);
+//        });
+//        // ▲▲▲ KẾT THÚC PHẦN THÊM MỚI ▲▲▲
 //    }
 //
-//    // ... (Các hàm còn lại giữ nguyên không đổi)
 //    private void setUserInfo() {
 //        FirebaseUser user = mAuth.getCurrentUser();
 //        if (user != null) {
@@ -115,7 +132,11 @@
 //            public void onDataChange(@NonNull DataSnapshot snapshot) {
 //                if(snapshot.exists()) {
 //                    for (DataSnapshot issuee : snapshot.getChildren()) {
-//                        list.add(issuee.getValue(Item.class));
+//                        Item item = issuee.getValue(Item.class);
+//                        if (item != null) {
+//                            item.setId(issuee.getKey());
+//                            list.add(item);
+//                        }
 //                    }
 //                    if(!list.isEmpty()){
 //                        binding.recyclerViewRecommended.setLayoutManager(
@@ -126,12 +147,11 @@
 //                    binding.progressBarRecommended.setVisibility(View.GONE);
 //                }
 //            }
-//
 //            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//            }
+//            public void onCancelled(@NonNull DatabaseError error) {}
 //        });
 //    }
+//
 //    private void initPopular() {
 //        DatabaseReference myref = database.getReference("Popular");
 //        ArrayList<Item> list = new ArrayList<>();
@@ -141,8 +161,8 @@
 //                if(snapshot.exists()) {
 //                    for (DataSnapshot issuee : snapshot.getChildren()) {
 //                        Item item = issuee.getValue(Item.class);
-//                        if (item != null) { // Thêm kiểm tra null cho an toàn
-//                            item.setId(issuee.getKey()); // Lấy ID của item từ Firebase
+//                        if (item != null) {
+//                            item.setId(issuee.getKey());
 //                            list.add(item);
 //                        }
 //                    }
@@ -155,12 +175,12 @@
 //                    binding.progressBarPopular.setVisibility(View.GONE);
 //                }
 //            }
-//
 //            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//            }
+//            public void onCancelled(@NonNull DatabaseError error) {}
 //        });
 //    }
+//
+//    // Các hàm initCategory, initLocations, banners, initBanners giữ nguyên không đổi
 //    private void initCategory() {
 //        DatabaseReference myref = database.getReference("Category");
 //        ArrayList<Category> list=new ArrayList<>();
@@ -180,12 +200,11 @@
 //                    binding.progressBarCategory.setVisibility(View.GONE);
 //                }
 //            }
-//
 //            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//            }
+//            public void onCancelled(@NonNull DatabaseError error) {}
 //        });
 //    }
+//
 //    private void initLocations() {
 //        DatabaseReference myref = database.getReference("Location");
 //        ArrayList<Location> list=new ArrayList<>();
@@ -196,16 +215,13 @@
 //                    for (DataSnapshot issuee : snapshot.getChildren()) {
 //                        list.add(issuee.getValue(Location.class));
 //                    }
-//
 //                    ArrayAdapter<Location> adapter=new ArrayAdapter<>(MainActivity.this,R.layout.sp_item,list);
 //                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 //                    binding.locationSp.setAdapter(adapter);
 //                }
 //            }
-//
 //            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//            }
+//            public void onCancelled(@NonNull DatabaseError error) {}
 //        });
 //    }
 //
@@ -229,23 +245,21 @@
 //            @Override
 //            public void onDataChange(@NonNull DataSnapshot snapshot) {
 //                if(snapshot.exists()){
-//                    for(DataSnapshot issue:snapshot.getChildren()){
+//                    for(DataSnapshot issue : snapshot.getChildren()){
 //                        items.add(issue.getValue(SliderItems.class));
-//
-//
 //                    }
 //                    banners(items);
 //                    binding.progressBarBanner.setVisibility(View.GONE);
 //                }
 //            }
-//
 //            @Override
 //            public void onCancelled(@NonNull DatabaseError error) {
+//                binding.progressBarBanner.setVisibility(View.GONE);
+//                Toast.makeText(MainActivity.this, "Failed to load banners.", Toast.LENGTH_SHORT).show();
 //            }
 //        });
 //    }
 //}
-
 
 package com.example.travelapp.Activity;
 
@@ -255,7 +269,6 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -283,7 +296,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements CategoryAdapter.OnCategoryClickListener {
     private ActivityMainBinding binding;
     private FirebaseDatabase database;
     private FirebaseAuth mAuth;
@@ -291,17 +304,17 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         mAuth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance("https://travel-app-12-default-rtdb.asia-southeast1.firebasedatabase.app");
 
+        // Thiết lập thông tin và các sự kiện click
         setUserInfo();
-        setupLogoutButton();
-        setupClickListeners(); // <-- Hàm mới để gom các listener
+        setupClickListeners();
 
+        // Tải dữ liệu từ Firebase
         initLocations();
         initBanners();
         initCategory();
@@ -310,10 +323,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupClickListeners() {
+        // Listener cho nút Đăng xuất
+        binding.logoutBtn.setOnClickListener(v -> {
+            mAuth.signOut();
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            finish();
+        });
+
         // Listener cho Bottom Menu
-        binding.bottomMenu.setItemSelected(R.id.exporer, true);
+        binding.bottomMenu.setItemSelected(R.id.exporer, true); // Đặt mục Home làm mặc định
         binding.bottomMenu.setOnItemSelectedListener(i -> {
-            if (i == R.id.cart) {
+            if (i == R.id.cart) { // ID của mục Profile trong file menu của bạn
                 startActivity(new Intent(MainActivity.this, ProfileActivity.class));
             }
         });
@@ -330,23 +352,27 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // ▼▼▼ THÊM MỚI: Listener cho hai nút "See All" ▼▼▼
+        // Listener cho hai nút "See All"
         binding.seeAllPopular.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, ItemListActivity.class);
-            // Gửi tên node Firebase và tiêu đề cho màn hình tiếp theo
-            intent.putExtra("CATEGORY_NODE", "Popular");
+            intent.putExtra("CATEGORY_NODE", "Popular"); // Gửi tên node Firebase
             intent.putExtra("CATEGORY_TITLE", "Popular Destinations");
             startActivity(intent);
         });
 
         binding.seeAllRecommendedBtn.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, ItemListActivity.class);
-            // Gửi tên node Firebase và tiêu đề cho màn hình tiếp theo
-            intent.putExtra("CATEGORY_NODE", "Item");
+            intent.putExtra("CATEGORY_NODE", "Item"); // Gửi tên node Firebase
             intent.putExtra("CATEGORY_TITLE", "Recommended");
             startActivity(intent);
         });
-        // ▲▲▲ KẾT THÚC PHẦN THÊM MỚI ▲▲▲
+        binding.bottomMenu.setOnItemSelectedListener(i -> {
+            if (i == R.id.cart) { // ID của Profile
+                startActivity(new Intent(MainActivity.this, ProfileActivity.class));
+            } else if (i == R.id.bookmark) { // <-- THÊM MỚI
+                startActivity(new Intent(MainActivity.this, BookmarkActivity.class));
+            }
+        });
     }
 
     private void setUserInfo() {
@@ -361,23 +387,13 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void setupLogoutButton() {
-        binding.logoutBtn.setOnClickListener(v -> {
-            mAuth.signOut();
-            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent);
-            finish();
-        });
-    }
-
     private void initRecommended() {
         DatabaseReference myref = database.getReference("Item");
         ArrayList<Item> list = new ArrayList<>();
-        myref.addListenerForSingleValueEvent(new ValueEventListener() {
+        myref.limitToFirst(10).addListenerForSingleValueEvent(new ValueEventListener() { // Giới hạn 10 item
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()) {
+                if (snapshot.exists()) {
                     for (DataSnapshot issuee : snapshot.getChildren()) {
                         Item item = issuee.getValue(Item.class);
                         if (item != null) {
@@ -385,7 +401,7 @@ public class MainActivity extends AppCompatActivity {
                             list.add(item);
                         }
                     }
-                    if(!list.isEmpty()){
+                    if (!list.isEmpty()) {
                         binding.recyclerViewRecommended.setLayoutManager(
                                 new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL, false));
                         RecyclerView.Adapter adapter = new RecommendedAdapter(list);
@@ -402,10 +418,10 @@ public class MainActivity extends AppCompatActivity {
     private void initPopular() {
         DatabaseReference myref = database.getReference("Popular");
         ArrayList<Item> list = new ArrayList<>();
-        myref.addListenerForSingleValueEvent(new ValueEventListener() {
+        myref.limitToFirst(10).addListenerForSingleValueEvent(new ValueEventListener() { // Giới hạn 10 item
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()) {
+                if (snapshot.exists()) {
                     for (DataSnapshot issuee : snapshot.getChildren()) {
                         Item item = issuee.getValue(Item.class);
                         if (item != null) {
@@ -413,7 +429,7 @@ public class MainActivity extends AppCompatActivity {
                             list.add(item);
                         }
                     }
-                    if(!list.isEmpty()){
+                    if (!list.isEmpty()) {
                         binding.recyclerViewPopular.setLayoutManager(
                                 new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL, false));
                         RecyclerView.Adapter adapter = new PopularAdapter(list);
@@ -427,21 +443,29 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    // Các hàm initCategory, initLocations, banners, initBanners giữ nguyên không đổi
     private void initCategory() {
         DatabaseReference myref = database.getReference("Category");
-        ArrayList<Category> list=new ArrayList<>();
+        ArrayList<Category> list = new ArrayList<>();
         myref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()) {
+                if (snapshot.exists()) {
                     for (DataSnapshot issuee : snapshot.getChildren()) {
-                        list.add(issuee.getValue(Category.class));
+                        Category category = issuee.getValue(Category.class);
+                        if (category != null) {
+                            try {
+                                category.setId(Integer.parseInt(issuee.getKey())); // Lấy ID của category
+                                list.add(category);
+                            } catch (NumberFormatException e) {
+                                // Bỏ qua nếu key không phải số
+                            }
+                        }
                     }
-                    if(!list.isEmpty()){
+                    if (!list.isEmpty()) {
                         binding.recyclerViewCategory.setLayoutManager(
                                 new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL, false));
-                        RecyclerView.Adapter adapter = new CategoryAdapter(list);
+                        // Truyền 'this' vì MainActivity đã implements OnCategoryClickListener
+                        RecyclerView.Adapter adapter = new CategoryAdapter(list, MainActivity.this);
                         binding.recyclerViewCategory.setAdapter(adapter);
                     }
                     binding.progressBarCategory.setVisibility(View.GONE);
@@ -454,15 +478,15 @@ public class MainActivity extends AppCompatActivity {
 
     private void initLocations() {
         DatabaseReference myref = database.getReference("Location");
-        ArrayList<Location> list=new ArrayList<>();
+        ArrayList<Location> list = new ArrayList<>();
         myref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()) {
+                if (snapshot.exists()) {
                     for (DataSnapshot issuee : snapshot.getChildren()) {
                         list.add(issuee.getValue(Location.class));
                     }
-                    ArrayAdapter<Location> adapter=new ArrayAdapter<>(MainActivity.this,R.layout.sp_item,list);
+                    ArrayAdapter<Location> adapter = new ArrayAdapter<>(MainActivity.this, R.layout.sp_item, list);
                     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     binding.locationSp.setAdapter(adapter);
                 }
@@ -491,8 +515,8 @@ public class MainActivity extends AppCompatActivity {
         myref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()){
-                    for(DataSnapshot issue : snapshot.getChildren()){
+                if (snapshot.exists()) {
+                    for (DataSnapshot issue : snapshot.getChildren()) {
                         items.add(issue.getValue(SliderItems.class));
                     }
                     banners(items);
@@ -506,4 +530,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    // Hàm này được gọi từ CategoryAdapter khi một danh mục được nhấn
+    @Override
+    public void onCategoryClick(Category category) {
+        Intent intent = new Intent(this, ItemListActivity.class);
+        // Gửi ID và tên của category sang màn hình danh sách
+        intent.putExtra("CATEGORY_ID", String.valueOf(category.getId()));
+        intent.putExtra("CATEGORY_TITLE", category.getName());
+        startActivity(intent);
+    }
+
 }
