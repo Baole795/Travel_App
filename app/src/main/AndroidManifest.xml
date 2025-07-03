@@ -68,6 +68,8 @@
         <activity android:name=".Activity.ItemListAdminActivity" android:exported="false" />
         <activity android:name=".Activity.AddEditItemActivity" android:exported="false" />
         <activity android:name=".Activity.BookmarkActivity" android:exported="false" />
+        <activity android:name=".Activity.ManageBookingsActivity" android:exported="false" />
+
 
     </application>
 

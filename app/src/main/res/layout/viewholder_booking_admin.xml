@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="8dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="4dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/itemPic"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:scaleType="centerCrop"
+            tools:src="@drawable/background"
+            app:shapeAppearanceOverlay="@style/roundedCornerTop"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Title và Price -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/itemTitleTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toStartOf="@id/itemPriceTxt"
+                    android:layout_marginEnd="8dp"
+                    tools:text="Nusa Penida Beach"
+                    android:textColor="@color/darkBlue"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/itemPriceTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    tools:text="$600"
+                    android:textColor="@color/purple"
+                    android:textSize="18sp"
+                    android:textStyle="bold"/>
+            </RelativeLayout>
+
+            <!-- ▼▼▼ THÊM MỚI: DURATION VÀ BED ▼▼▼ -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp">
+                <TextView
+                    android:id="@+id/itemDurationTxt"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    tools:text="1D / 1N"
+                    android:drawableStart="@drawable/hourglass"
+                    android:drawablePadding="8dp"
+                    android:gravity="center_vertical"
+                    app:drawableTint="@color/darkBlue"/>
+                <TextView
+                    android:id="@+id/itemBedTxt"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    tools:text="3 Beds"
+                    android:drawableStart="@drawable/bed"
+                    android:drawablePadding="8dp"
+                    android:gravity="center_vertical"
+                    app:drawableTint="@color/darkBlue"/>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#E0E0E0"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="12dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Customer Info"
+                android:textStyle="bold"
+                android:textColor="@color/darkBlue"/>
+
+            <TextView
+                android:id="@+id/customerNameTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="by Hoang Phi Hung"
+                android:drawableStart="@drawable/ic_profile"
+                android:drawablePadding="8dp"
+                android:gravity="center_vertical"
+                app:drawableTint="@color/darkBlue"
+                android:layout_marginTop="8dp"/>
+
+            <TextView
+                android:id="@+id/customerEmailTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="user@example.com"
+                android:drawableStart="@drawable/ic_email"
+                android:drawablePadding="8dp"
+                android:gravity="center_vertical"
+                app:drawableTint="@color/darkBlue"
+                android:layout_marginTop="4dp"/>
+
+            <TextView
+                android:id="@+id/customerPhoneTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="0912345678"
+                android:drawableStart="@drawable/ic_phone"
+                android:drawablePadding="8dp"
+                android:gravity="center_vertical"
+                app:drawableTint="@color/darkBlue"
+                android:layout_marginTop="4dp"/>
+
+            <TextView
+                android:id="@+id/bookingDateTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Date: 2025-07-03 19:21"
+                android:drawableStart="@drawable/ic_calendar"
+                android:drawablePadding="8dp"
+                android:gravity="center_vertical"
+                app:drawableTint="@color/darkBlue"
+                android:layout_marginTop="4dp"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#E0E0E0"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="12dp"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/statusTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:paddingHorizontal="12dp"
+                    android:paddingVertical="4dp"
+                    android:text="Confirmed"
+                    android:textColor="@color/white"
+                    android:background="@drawable/green_bg"
+                    android:textStyle="bold"/>
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/manageBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:text="Manage"
+                    style="@android:style/Widget.Button"
+                    android:background="@drawable/grey_bg2"
+                    android:textColor="@color/darkBlue"/>
+            </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

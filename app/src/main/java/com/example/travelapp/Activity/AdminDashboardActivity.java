@@ -40,14 +40,17 @@ public class AdminDashboardActivity extends AppCompatActivity {
             Toast.makeText(this, "Analytics Clicked", Toast.LENGTH_SHORT).show();
         });
         binding.cardManageUsers.setOnClickListener(v -> {
-            // Bỏ comment các dòng dưới đây
+
             Intent intent = new Intent(this, ManageUsersActivity.class);
             startActivity(intent);
         });
         binding.cardManageContent.setOnClickListener(v -> {
-            // Bỏ comment các dòng dưới đây
             Intent intent = new Intent(this, ManageContentActivity.class);
             startActivity(intent);
+        });
+        // Trong AdminDashboardActivity.java
+        binding.cardManageBookings.setOnClickListener(v -> {
+            startActivity(new Intent(this, ManageBookingsActivity.class));
         });
 
     }
